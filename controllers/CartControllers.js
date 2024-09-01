@@ -1,4 +1,4 @@
-const services = require("../services/services");
+const services = require("../services/CartServices");
 const db = require("../models");
 
 const insert = async (req, res) => {
