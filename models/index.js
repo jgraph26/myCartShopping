@@ -8,6 +8,7 @@ const sequelize = new Sequelize(
   {
     host: config.host,
     dialect: config.dialect,
+    timezone: "-04:00", // UTC
     logging: false,
 
     define: {
@@ -21,6 +22,7 @@ const db = {
   Sequelize,
   Cart: require("./Cart")(sequelize, DataTypes),
   Product: require("./Product")(sequelize, DataTypes),
+  User: require("./User")(sequelize, DataTypes),
 };
 
 Object.keys(db).forEach((modelName) => {

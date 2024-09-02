@@ -11,7 +11,7 @@ const insert = async (req, res) => {
     const item = await services.addItem(productId, quantity);
     res.status(200).json(item);
   } catch (error) {
-    res.status(500).json("{ error: error.message }");
+    res.status(500).json({ error: error.message });
   }
 };
 

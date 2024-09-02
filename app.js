@@ -2,14 +2,16 @@ const morgan = require("morgan");
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv");
-const routers = require("./routes/routes");
+const routers = require("./routes/loginRouter");
 const db = require("./models");
+
 dotenv.config();
 
 //middleWare
 app.use(morgan("dev"));
 app.use(express.json());
 app.use("/Cart", routers);
+app.use("/User", routers);
 
 //connection
 
