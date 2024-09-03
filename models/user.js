@@ -28,6 +28,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      role: {
+        type: DataTypes.ENUM(["client", "admin"]),
+        defaultValue: "client",
+      },
     },
     { timestamps: true }
   );

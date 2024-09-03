@@ -1,6 +1,8 @@
 const db = require("../models");
-const bcrypt = require('bcrypt');
-
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 // constantes de patrones para validaciones
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 const EMAIL_PATTERN = /^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
@@ -30,16 +32,15 @@ const register = async (email, user_name, full_name, password) => {
 
   // Cifra la contraseña antes de guardarla en la base de datos
   const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await db.User.create({
     email,
     user_name,
     full_name,
     password: hashedPassword,
+    role: "client",
   });
-  
 };
 
 const login = async (email, user_name, password) => {
@@ -63,11 +64,17 @@ const login = async (email, user_name, password) => {
     // Compara la contraseña ingresada con la contraseña cifrada en la base de datos
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if(!isPasswordValid) {
+    if (!isPasswordValid) {
       return { status: 401, error: "Password is incorrect" };
     }
 
-    return { status: 200, success: true, user };
+    const token = jwt.sign(
+      { userId: user.id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    return { status: 200, success: true, token, user };
   } catch (error) {
     return { status: 500, error: "An error occurred while trying to login" };
   }

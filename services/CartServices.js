@@ -6,7 +6,7 @@ const getCartItems = async () => {
 };
 
 const addItem = async (productId, quantity) => {
-  if (!db.Cart) throw new console.error("db.cart dosen't or is not defined");
+  if (!db.Cart) throw new console.error("data base don't exist");
 
   const item = await db.Cart.findOne({ where: { productId } });
 
