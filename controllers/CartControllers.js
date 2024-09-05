@@ -18,11 +18,29 @@ const insert = async (req, res) => {
 const show = async (req, res) => {
   try {
     const list = await services.getCartItems();
+    console.log(list.list);
+
+    // Verificar si list es un array
+    if (!Array.isArray(list.list)) {
+      console.log("Result.list is not an array:", list.list); // Imprimir para depuración
+      return res
+        .status(500)
+        .json({ error: "The response list is not an array" });
+    }
+
     if (list.length === 0) {
       res.status(500).send(`the cart is empty`);
-    } else {
-      res.status(200).json(list);
     }
+    if (list.status !== 200) {
+      res.status(list.status).json(list.error);
+    }
+
+    const response = {
+      productQuantity: list.productQuantity,
+      itemslist: list.list,
+    };
+
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

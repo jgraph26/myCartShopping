@@ -1,8 +1,44 @@
 const db = require("../models");
 
 const getCartItems = async () => {
-  const list = await db.Cart.findAll({ include: "product" });
-  return list;
+  try {
+
+    const list = await db.Cart.findAll({
+      include: {
+        model: db.Product,
+        as: 'product',
+        attributes: [
+          "name",
+          "price",
+          "condition",
+          "size",
+          "color",
+          "brand",
+          "quantity",
+        ],
+      },
+    });
+
+    return {
+      status: 200,
+      productQuantity: `Total products in cart: ${list.length}`, // Cambiado a 'message'
+      list: list.map(item => ({
+        quantity: item.quantity,
+        product: {
+          name: item.product.name,
+          price: item.product.price,
+          condition: item.product.condition,
+          size: item.product.size,
+          color: item.product.color,
+          brand: item.product.brand,
+          quantity: item.product.quantity
+        }
+      })),
+    };
+
+  } catch (error) {
+    return { status: 500, error: error.message };
+  }
 };
 
 const addItem = async (productId, quantity) => {
@@ -19,7 +55,9 @@ const addItem = async (productId, quantity) => {
 };
 
 const removeProduct = async (productId) => {
-  await db.Cart.destroy({ where: { productId } });
+  await db.Cart.destroy({
+    where: { productId },
+  });
 };
 
 module.exports = { getCartItems, addItem, removeProduct };

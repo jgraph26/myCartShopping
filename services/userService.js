@@ -192,7 +192,6 @@ const clientFilterProducts = async (tags, brand, minPrice, maxPrice) => {
         return { status: 404, error: "No tags found" };
       }
 
-      console.log(tagInstances);
       const tagIds = tagInstances.map((tag) => tag.id);
 
       const products = await db.Product.findAll({
