@@ -12,7 +12,7 @@ const sequelize = new Sequelize(
     logging: false,
 
     define: {
-      timesTamp: false,
+      timestamps: false,
     },
   }
 );
@@ -23,6 +23,7 @@ const db = {
   Cart: require("./Cart")(sequelize, DataTypes),
   Product: require("./Product")(sequelize, DataTypes),
   User: require("./User")(sequelize, DataTypes),
+  Tag: require("./tag")(sequelize, DataTypes),
 };
 
 Object.keys(db).forEach((modelName) => {

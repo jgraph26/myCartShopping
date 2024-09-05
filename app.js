@@ -9,23 +9,29 @@ const db = require("./models");
 
 dotenv.config();
 
-//middleWare
+// Middleware
 app.use(morgan("dev"));
 app.use(express.json());
 app.use("/Cart", CartRouter);
 app.use("/User", userRouters);
 app.use("/admin", adminRouter);
 
-//connection
-
+// Connection
 db.sequelize
-  .sync()
+  .sync({ force: false }) // Usa `force: false` para evitar eliminar tablas existentes
   .then(() => {
-    app.set("port", process.env.PORT);
-    app.listen(app.get("port"), () => {
-      console.log(`conection sussesfull in port:${app.get("port")}`);
+    const port = process.env.PORT;
+    app.set("port", port);
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
     });
   })
   .catch((error) => {
-    console.log(error.message);
+    console.error("Unable to connect to the database:", error.message);
   });
+
+// db.sequelize
+// .drop()
+// .then(() => db.sequelize.sync({ force: true }))
+// .then(() => console.log("Database synchronized"))
+// .catch((error) => console.error("Error syncing database:", error.message));

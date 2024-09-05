@@ -9,4 +9,8 @@ router.post("/addProduct", isAdmin, adminControllers.addProductToStock);
 
 router.post("/deleteP", isAdmin, adminControllers.deleteProducts);
 
+router.get("/showAllP", isAdmin, adminControllers.showAllProducts);
+
+router.get("/filterP", isAdmin, adminControllers.adminFilterProduct);
+
 module.exports = router;

@@ -1,5 +1,4 @@
 const { DataTypes } = require("sequelize");
-const { toDefaultValue } = require("sequelize/lib/utils");
 
 module.exports = (sequelize) => {
   const Product = sequelize.define(
@@ -33,8 +32,20 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     },
-    { timestamps: true }
+    {
+      indexes: [
+        {
+          fields: ["price"],
+          unique: false,
+        },
+      ],
+      timestamps: true,
+    }
   );
+
+  Product.associate = (models) => {
+    Product.belongsToMany(models.Tag, { through: "productTags" });
+  };
 
   return Product;
 };

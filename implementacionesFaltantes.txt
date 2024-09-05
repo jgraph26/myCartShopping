@@ -41,3 +41,25 @@ Para completar el backend de una tienda en línea similar a la de la imagen, ade
     - Implementar cupones de descuento y gestionar promociones especiales.
 
 Estas funcionalidades te ayudarán a ofrecer una experiencia completa y robusta para una tienda en línea.
+
+  // "pant",
+  // "jeans",
+  // "short",
+  // "shoes",
+  // "t-shirts",
+  // "shirts",
+  // "hats",
+  // "underwear man",
+  // "underwear woman",
+  // "scarves",
+  // "jackets",
+  // "boots",
+  // "dresses",
+  // "swimwear man ",
+  // "swimwear man",
+  // "accessories",
+  // "bags",
+  // "watches",
+  // "jewelry",
+  // "other",
+
