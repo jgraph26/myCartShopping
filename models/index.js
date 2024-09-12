@@ -1,18 +1,23 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const config = require("../config/config")["development"];
+import { Sequelize, DataTypes } from "sequelize";
+import config from "../config/config.js";
+const configDevelopment = config.development;
+import Cart from "./cart.js";
+import Product from "./Product.js";
+import User from "./User.js";
+import Tag from "./tag.js";
 
 const sequelize = new Sequelize(
-  config.database,
-  config.username,
-  config.password,
+  configDevelopment.database,
+  configDevelopment.username,
+  configDevelopment.password,
   {
-    host: config.host,
-    dialect: config.dialect,
+    host: configDevelopment.host,
+    dialect: configDevelopment.dialect,
     timezone: "-04:00", // UTC
     logging: false,
 
     define: {
-      timestamps: false,
+      timestamps: true,
     },
   }
 );
@@ -20,10 +25,10 @@ const sequelize = new Sequelize(
 const db = {
   sequelize,
   Sequelize,
-  Cart: require("./Cart")(sequelize, DataTypes),
-  Product: require("./Product")(sequelize, DataTypes),
-  User: require("./User")(sequelize, DataTypes),
-  Tag: require("./tag")(sequelize, DataTypes),
+  Cart: Cart(sequelize, DataTypes), // Llamada de la función importada
+  Product: Product(sequelize, DataTypes),
+  User: User(sequelize, DataTypes),
+  Tag: Tag(sequelize, DataTypes),
 };
 
 Object.keys(db).forEach((modelName) => {
@@ -32,4 +37,4 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-module.exports = db;
+export default db;

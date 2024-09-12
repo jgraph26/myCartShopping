@@ -1,6 +1,4 @@
-const services = require("../services/adminService");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+import services from "../services/adminService.js";
 
 const showAllProducts = async (req, res) => {
   try {
@@ -88,7 +86,7 @@ const adminFilterProduct = async (req, res) => {
   if (
     (!tags || tags.length === 0) &&
     (!brand || brand === null) &&
-    (!minPrice) &&
+    !minPrice &&
     (!maxPrice || maxPrice === 0)
   ) {
     return res.status(400).json({ error: "Tags, prices or brand  required!" });
@@ -106,10 +104,12 @@ const adminFilterProduct = async (req, res) => {
   res.status(200).json(products);
 };
 
-module.exports = {
+const methods = {
   addAdmin,
   addProductToStock,
   deleteProducts,
   showAllProducts,
   adminFilterProduct,
 };
+
+export default methods;

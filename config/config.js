@@ -1,8 +1,8 @@
-const dotenv = require('dotenv');
+import dotenv from 'dotenv'
 dotenv.config();
 
 
-module.exports = {
+const config = {
     development:{
         username: process.env.USER,
         password: process.env.PASSWORD,
@@ -14,3 +14,5 @@ module.exports = {
     }
 }
 
+
+export default config;

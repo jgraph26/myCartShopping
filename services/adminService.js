@@ -1,8 +1,8 @@
-const db = require("../models");
+import db from "../models/index.js";
 const SKU_PATTERN = /^[A-Z]{3}\d{3}-[A-Z]{2}-[A-Z]$/;
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const { Op } = require("sequelize");
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import { Op } from "sequelize";
 
 const getAllProducts = async () => {
   try {
@@ -277,10 +277,12 @@ const adminFilterProducts = async (tags, brand, minPrice, maxPrice) => {
   }
 };
 
-module.exports = {
+const methods = {
   addAdminService,
   addProduct,
   deleteProduct,
   getAllProducts,
   adminFilterProducts,
 };
+
+export default methods;

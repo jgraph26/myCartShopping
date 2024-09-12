@@ -1,5 +1,5 @@
-const services = require("../services/CartServices");
-const db = require("../models");
+import services from "../services/CartServices.js"
+import db from "../models/index.js"
 
 const insert = async (req, res) => {
   try {
@@ -70,4 +70,6 @@ const remove = async (req, res) => {
   }
 };
 
-module.exports = { insert, show, remove };
+const methods = { insert, show, remove };
+
+export default methods;

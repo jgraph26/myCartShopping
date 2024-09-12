@@ -1,5 +1,4 @@
-const db = require("../models");
-const services = require("../services/productService");
+import services from "../services/adminService";
 
 const addProductToStock = async (req, res) => {
   try {
@@ -26,4 +25,4 @@ const addProductToStock = async (req, res) => {
   }
 };
 
-module.exports = { addProductToStock };
+export default  addProductToStock ;

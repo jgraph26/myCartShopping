@@ -1,8 +1,8 @@
-const db = require("../models");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
-const { Op } = require("sequelize");
+import db from "../models/index.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import { Op } from "sequelize";
 dotenv.config();
 // constantes de patrones para validaciones
 const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
@@ -294,10 +294,12 @@ const clientFilterProducts = async (tags, brand, minPrice, maxPrice) => {
   }
 };
 
-module.exports = {
+const methods = {
   register,
   login,
   changuePassword,
   clientFilterProducts,
   changueUserName,
 };
+
+export default methods;

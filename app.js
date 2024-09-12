@@ -1,11 +1,12 @@
-const morgan = require("morgan");
-const express = require("express");
+// const express = require("express");
+import morgan from "morgan";
+import express from "express";
 const app = express();
-const dotenv = require("dotenv");
-const userRouters = require("./routes/loginRouter");
-const adminRouter = require("./routes/adminRouter");
-const CartRouter = require("./routes/cartRoutes");
-const db = require("./models");
+import dotenv from "dotenv";
+import userRouters from "./routes/loginRouter.js";
+import adminRouter from "./routes/adminRouter.js";
+import CartRouter from "./routes/cartRoutes.js";
+import db from "./models/index.js";
 
 dotenv.config();
 

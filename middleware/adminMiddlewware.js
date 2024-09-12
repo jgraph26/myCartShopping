@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv");
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 dotenv.config();
 
 const isAdmin = (req, res, next) => {
@@ -13,7 +13,9 @@ const isAdmin = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
     if (decoded.role !== "admin") {
-      return res.status(403).json({ error: "Access denied (you're not an admin)" });
+      return res
+        .status(403)
+        .json({ error: "Access denied (you're not an admin)" });
     }
 
     next();
@@ -22,4 +24,4 @@ const isAdmin = (req, res, next) => {
   }
 };
 
-module.exports = { isAdmin };
+export default  isAdmin ;

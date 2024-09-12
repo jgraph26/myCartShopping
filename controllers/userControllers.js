@@ -1,4 +1,4 @@
-const services = require("../services/userService");
+import services from "../services/userService.js";
 
 const registerSystem = async (req, res) => {
   try {
@@ -35,7 +35,8 @@ const changuePassword = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
 
     const { actualPassword, newPassword, repeatPassword } = req.body;
-    if (!repeatPassword) return res.status(401).json({error:" password confirm required"})
+    if (!repeatPassword)
+      return res.status(401).json({ error: " password confirm required" });
 
     if (!newPassword && (!token || token === null)) {
       return res
@@ -68,12 +69,7 @@ const changueUserName = async (req, res) => {
         .status(500)
         .json({ error: "required actual password and new password" });
     }
-    const result = await services.changueUserName(
-      token,
-      password,
-      user_name,
-      
-    );
+    const result = await services.changueUserName(token, password, user_name);
     if (result.status !== 200) {
       res.status(result.status).json(result.error);
     }
@@ -106,15 +102,16 @@ const clientFilterProduct = async (req, res) => {
     return res.status(products.status).json(products.error);
 
   console.log(`productos encontrados: ${products.length} ${products}`);
-  
 
   res.status(200).json(products);
 };
 
-module.exports = {
+const methods = {
   registerSystem,
   login,
   changuePassword,
   clientFilterProduct,
   changueUserName,
 };
+
+export default methods;

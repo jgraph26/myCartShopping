@@ -11,6 +11,7 @@
   },
   "name": "mycartpractice",
   "version": "1.0.0",
+  "type": "module",
   "main": "app.js",
   "devDependencies": {
     "morgan": "^1.10.0",

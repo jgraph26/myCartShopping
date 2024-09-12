@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const controllers = require("../controllers/userControllers");
+import controllers from "../controllers/userControllers.js";
 
 router.post("/register", controllers.registerSystem);
 
@@ -12,4 +12,4 @@ router.get("/clientFilterP", controllers.clientFilterProduct);
 
 router.post("/changueUserName", controllers.changueUserName);
 
-module.exports = router;
+export default router;

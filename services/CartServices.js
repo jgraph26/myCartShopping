@@ -1,4 +1,4 @@
-const db = require("../models");
+import db from "../models/index.js";
 
 const getCartItems = async () => {
   try {
@@ -60,4 +60,7 @@ const removeProduct = async (productId) => {
   });
 };
 
-module.exports = { getCartItems, addItem, removeProduct };
+const methods = { getCartItems, addItem, removeProduct };
+
+
+export default methods;
