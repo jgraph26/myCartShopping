@@ -1,5 +1,5 @@
-import services from "../services/CartServices.js"
-import db from "../models/index.js"
+import services from "../services/CartServices.js";
+import db from "../models/index.js";
 
 const insert = async (req, res) => {
   try {
@@ -18,7 +18,7 @@ const insert = async (req, res) => {
 const show = async (req, res) => {
   try {
     const list = await services.getCartItems();
-    console.log(list.list);
+    console.log(list);
 
     // Verificar si list es un array
     if (!Array.isArray(list.list)) {

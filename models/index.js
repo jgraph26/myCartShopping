@@ -1,10 +1,11 @@
 import { Sequelize, DataTypes } from "sequelize";
 import config from "../config/config.js";
 const configDevelopment = config.development;
-import Cart from "./cart.js";
+import Cart from "./Cart.js";
 import Product from "./Product.js";
 import User from "./User.js";
-import Tag from "./tag.js";
+import Tag from "./Tag.js";
+import Address from "./Address.js";
 
 const sequelize = new Sequelize(
   configDevelopment.database,
@@ -29,6 +30,7 @@ const db = {
   Product: Product(sequelize, DataTypes),
   User: User(sequelize, DataTypes),
   Tag: Tag(sequelize, DataTypes),
+  Address: Address (sequelize, DataTypes),
 };
 
 Object.keys(db).forEach((modelName) => {

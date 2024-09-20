@@ -28,6 +28,11 @@ const user = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+
+      // addressId: {
+      //   type: DataTypes.INTEGER,
+      //   allowNull: false,
+      // },
       role: {
         type: DataTypes.ENUM(["client", "admin"]),
         defaultValue: "client",
@@ -35,6 +40,14 @@ const user = (sequelize) => {
     },
     { timestamps: true }
   );
+
+
+  // User.associate = (models) => {
+  //   User.belongsTo(models.Address, {
+  //     foreignKey: "addressId",
+  //     as: "address",
+  //   });
+  // };
 
   return User;
 };

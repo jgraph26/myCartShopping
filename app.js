@@ -1,4 +1,3 @@
-// const express = require("express");
 import morgan from "morgan";
 import express from "express";
 const app = express();
@@ -19,7 +18,7 @@ app.use("/admin", adminRouter);
 
 // Connection
 db.sequelize
-  .sync({ force: false }) // Uso `force: false` para evitar eliminar tablas existentes
+  .sync({ force: false })
   .then(() => {
     const port = process.env.PORT;
     app.listen(port, () => {

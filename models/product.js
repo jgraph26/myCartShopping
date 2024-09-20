@@ -12,6 +12,14 @@ const product = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
+      color: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      size: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       quantity: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
@@ -39,8 +47,8 @@ const product = (sequelize) => {
           unique: false,
         },
       ],
-      timestamps: true,
-    }
+    },
+    { timestamps: true }
   );
 
   Product.associate = (models) => {
